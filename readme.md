@@ -1,3 +1,4 @@
+
 <p align="center">
 	<img alt="Rice Bowl" src="public/images/icon-512.png" width="90">
 	<h2 align="center">Next PWA Template</h2>
@@ -14,6 +15,9 @@
 		<img alt="100% lighthouse scores" src="https://img.shields.io/badge/lighthouse-100%25-845EF7.svg?logo=lighthouse&logoColor=white&style=flat-square" />
 	</a>
 </p>
+
+## Build status:
+[![Netlify Status](https://api.netlify.com/api/v1/badges/781bfc66-7154-48ba-b7e4-6407fbf8d0ac/deploy-status)](https://app.netlify.com/sites/fantastic-palmier-ce8dbd/deploys)
 
 ## Features
 
