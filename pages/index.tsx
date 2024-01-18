@@ -2,9 +2,11 @@ import Button from '@/components/button'
 import Page from '@/components/page'
 import Section from '@/components/section'
 import { useEffect, useState } from 'react';
+import { useNetwork } from './_app';
 
 const Index = () => {
 	const [iterator, setIterator] = useState<number>(1);
+	let isOnline = useNetwork()
 
 	useEffect(() => {
 		if (typeof window !== 'undefined' && window.localStorage) {
@@ -15,6 +17,10 @@ const Index = () => {
 
 	function handleSave(value: number) {
 		if (typeof window !== "undefined" && window.localStorage) {
+
+			if (isOnline) alert("online")
+			else alert("offline")
+		
 			localStorage.setItem("iterator", value.toString());
 		}
 	}
