@@ -3,6 +3,7 @@ import Page from '@/components/page'
 import Section from '@/components/section'
 import { useEffect, useState } from 'react';
 import { useNetwork } from './_app';
+import NumberInput from '@/components/number-input';
 
 const Index = () => {
 	const [iterator, setIterator] = useState<number>(1);
@@ -20,7 +21,7 @@ const Index = () => {
 
 			if (isOnline) alert("online")
 			else alert("offline")
-		
+
 			localStorage.setItem("iterator", value.toString());
 		}
 	}
@@ -47,6 +48,11 @@ const Index = () => {
 						setIterator(iterator + 1)
 					}
 					} />
+					<div className="grid gap-4 grid-cols-3 ">
+					<NumberInput label='sets' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+					<NumberInput label='weight' onChange={(num) => console.log(`Number weight has changed: ${num}`)}/>
+					<NumberInput label='reps' onChange={(num) => console.log(`Number reps has changed: ${num}`)}/>
+					</div>
 					<br />
 
 					<p className='text-sm text-zinc-600 dark:text-zinc-400'>
