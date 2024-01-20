@@ -4,6 +4,7 @@ import Section from '@/components/section'
 import { useEffect, useState } from 'react';
 import { useNetwork } from './_app';
 import NumberInput from '@/components/number-input';
+import NumberInputHorizontal from '@/components/number-input-horizontal';
 
 const Index = () => {
 	const [iterator, setIterator] = useState<number>(1);
@@ -43,15 +44,15 @@ const Index = () => {
 						worldwide.
 					</p>
 					<p id="label">{iterator}</p>
-					<Button text="Click me!" onClick={() => {
+					<Button text="Online check!" onClick={() => {
 						handleSave(iterator + 1)
 						setIterator(iterator + 1)
 					}
 					} />
-					<div className="grid gap-4 grid-cols-3 ">
-					<NumberInput label='sets' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
-					<NumberInput label='weight' onChange={(num) => console.log(`Number weight has changed: ${num}`)}/>
-					<NumberInput label='reps' onChange={(num) => console.log(`Number reps has changed: ${num}`)}/>
+					<div className="grid gap-4 grid-cols-1 ">
+					<NumberInputHorizontal label='sets' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+					<NumberInputHorizontal label='weight' onChange={(num) => console.log(`Number weight has changed: ${num}`)}/>
+					<NumberInputHorizontal label='reps' onChange={(num) => console.log(`Number reps has changed: ${num}`)}/>
 					</div>
 					<br />
 
