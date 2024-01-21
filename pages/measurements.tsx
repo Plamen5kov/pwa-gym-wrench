@@ -37,7 +37,7 @@ const Recipes = () => (
 				</li>
 				<li className=''>
 					<div className="grid gap-4 grid-cols-1 ">
-						<NumberInputHorizontal label='Weist' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal label='Waist' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
 					</div>
 				</li>
 				<li className=''>
