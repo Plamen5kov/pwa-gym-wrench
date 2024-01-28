@@ -1,9 +1,10 @@
 import AccordeonMy from '@/components/accordeon';
 import Page from '@/components/page'
 import Section from '@/components/section'
+import { InvolvedMuscles } from '@/interfaces/exercise';
 import { CalculationUtility } from '@/utilities/calculation-utility';
-import { DIFICULTY_COLORS } from '@/utilities/constants';
-import React, { useState } from 'react';
+import { DIFICULTY_COLORS, exampleWorkout } from '@/utilities/constants';
+import React, { useEffect, useState } from 'react';
 import Model, { IExerciseData, IMuscleStats, ModelType, MuscleType } from 'react-body-highlighter';
 
 
@@ -15,36 +16,47 @@ const exampleResultOfWorkoutTransformation: Record<string, number> = {
 	[MuscleType.LOWER_BACK]: 320,
 }
 
-//TODO: accept transformed workout though props
+/**
+ * TODO: think about sending the entire workout here so it can be
+ * - changed dynamically while training
+ * - the picture is changed instantly
+ * - think about what the edit design should look like so it's easy to use
+ */
 const Workout = () => {
 
-	const maxMuscleVolume = Object.values(exampleResultOfWorkoutTransformation).sort((a, b) => a - b).reverse()[0]
+	const [exerciseData, setExerciseData] = useState([] as Array<IExerciseData>)
 
-	const [data] = useState(Object.keys(exampleResultOfWorkoutTransformation).map((x: string) => ({
-		name: x,
-		muscles: [x],
-		frequency: CalculationUtility.calculateDificultyPerMuscle(exampleResultOfWorkoutTransformation[x], 0, maxMuscleVolume)
-	} as IExerciseData)))
+	useEffect(() => {
+		const currentLoadedWorkout = (CalculationUtility.getInvolvedMuscles(exampleWorkout))
+
+		const maxMuscleVolume = Object.values(currentLoadedWorkout).sort((a, b) => a - b).reverse()[0]
+
+		setExerciseData(Object.keys(currentLoadedWorkout).map((x: string) => ({
+			name: x,
+			muscles: [x],
+			frequency: CalculationUtility.calculateDificultyPerMuscle(currentLoadedWorkout[x], 0, maxMuscleVolume)
+		} as IExerciseData)))
+	}, [])
 
 	const handleClick = React.useCallback(({ muscle, data }: IMuscleStats) => {
 		const { exercises, frequency } = data;
 
 		alert(`You clicked the ${muscle}! You've worked out this muscle ${frequency} times through the following exercises: ${JSON.stringify(exercises)}`)
 
-	}, [data]);
-
+	}, [exerciseData]);
+	1
 	return (
 		<Page>
 			<Section>
 				<div className='grid grid-cols-2 gap-2'>
 					<Model
-						data={data}
+						data={exerciseData}
 						style={{ width: '10rem' }}
 						onClick={handleClick}
 						highlightedColors={DIFICULTY_COLORS}
 					/>
 					<Model
-						data={data}
+						data={exerciseData}
 						style={{ width: '10rem' }}
 						onClick={handleClick}
 						type={ModelType.POSTERIOR}
