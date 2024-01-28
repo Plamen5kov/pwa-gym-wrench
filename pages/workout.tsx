@@ -1,15 +1,30 @@
 import AccordeonMy from '@/components/accordeon';
 import Page from '@/components/page'
 import Section from '@/components/section'
-import React from 'react';
-import Model, { IExerciseData, IMuscleStats } from 'react-body-highlighter';
+import { CalculationUtility } from '@/utilities/calculation-utility';
+import { DIFICULTY_COLORS } from '@/utilities/constants';
+import React, { useState } from 'react';
+import Model, { IExerciseData, IMuscleStats, ModelType, MuscleType } from 'react-body-highlighter';
 
-const Story = () => {
 
-	const data: IExerciseData[] = [
-		{ name: 'Bench Press', muscles: ['chest', 'triceps', 'front-deltoids'], frequency: 1 },
-		{ name: 'Push Ups', muscles: ['chest'], frequency: 2 },
-	];
+const exampleResultOfWorkoutTransformation: Record<string, number> = {
+	[MuscleType.CHEST]: 1920,
+	[MuscleType.UPPER_BACK]: 1620,
+	[MuscleType.TRICEPS]: 980,
+	[MuscleType.BICEPS]: 320,
+	[MuscleType.LOWER_BACK]: 320,
+}
+
+//TODO: accept transformed workout though props
+const Workout = () => {
+
+	const maxMuscleVolume = Object.values(exampleResultOfWorkoutTransformation).sort((a, b) => a - b).reverse()[0]
+
+	const [data] = useState(Object.keys(exampleResultOfWorkoutTransformation).map((x: string) => ({
+		name: x,
+		muscles: [x],
+		frequency: CalculationUtility.calculateDificultyPerMuscle(exampleResultOfWorkoutTransformation[x], 0, maxMuscleVolume)
+	} as IExerciseData)))
 
 	const handleClick = React.useCallback(({ muscle, data }: IMuscleStats) => {
 		const { exercises, frequency } = data;
@@ -21,17 +36,19 @@ const Story = () => {
 	return (
 		<Page>
 			<Section>
-				<div className='grid grid-cols-2 gap-15'>
+				<div className='grid grid-cols-2 gap-2'>
 					<Model
 						data={data}
-						style={{ width: '15rem'  }}
+						style={{ width: '10rem' }}
 						onClick={handleClick}
+						highlightedColors={DIFICULTY_COLORS}
 					/>
 					<Model
 						data={data}
-						style={{ width: '15rem' }}
+						style={{ width: '10rem' }}
 						onClick={handleClick}
-						type='posterior'
+						type={ModelType.POSTERIOR}
+						highlightedColors={DIFICULTY_COLORS}
 					/>
 				</div>
 
@@ -48,4 +65,4 @@ const Story = () => {
 	)
 }
 
-export default Story
+export default Workout
