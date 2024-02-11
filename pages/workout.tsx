@@ -1,7 +1,6 @@
 import AccordeonMy from '@/components/accordeon';
 import Page from '@/components/page'
 import Section from '@/components/section'
-import { InvolvedMuscles } from '@/interfaces/exercise';
 import { CalculationUtility } from '@/utilities/calculation-utility';
 import { DIFICULTY_COLORS, exampleWorkout } from '@/utilities/constants';
 import React, { useEffect, useState } from 'react';
@@ -44,7 +43,7 @@ const Workout = () => {
 		alert(`You clicked the ${muscle}! You've worked out this muscle ${frequency} times through the following exercises: ${JSON.stringify(exercises)}`)
 
 	}, [exerciseData]);
-	1
+
 	return (
 		<Page>
 			<Section>
@@ -70,7 +69,7 @@ const Workout = () => {
 
 				<div></div>
 
-				<AccordeonMy />
+				<AccordeonMy workout={exampleWorkout} />
 
 			</Section>
 		</Page>

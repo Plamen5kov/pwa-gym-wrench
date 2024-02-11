@@ -28,14 +28,17 @@ export const exampleWorkout: Array<Exercise> = [
             }
         },
         sets: [{
-            weight: 80,
-            reps: 8
+            weight: 81,
+            reps: 1
         }, {
-            weight: 80,
-            reps: 8
+            weight: 82,
+            reps: 2
         }, {
-            weight: 80,
-            reps: 8
+            weight: 83,
+            reps: 3
+        }, {
+            weight: 84,
+            reps: 4
         }]
     },
     {
@@ -54,18 +57,47 @@ export const exampleWorkout: Array<Exercise> = [
             }
         },
         sets: [{
-            weight: 80,
-            reps: 8
+            weight: 71,
+            reps: 1
         },
         {
-            weight: 80,
-            reps: 8
+            weight: 72,
+            reps: 2
         },
         {
-            weight: 80,
-            reps: 8
+            weight: 73,
+            reps: 3
         }]
-    }
+    },
+    {
+        name: "squat",
+        primaryMuscles: {
+            [MuscleType.QUADRICEPS]: {
+                participation: 1
+            },
+        },
+        secondaryMuscles: {
+            [MuscleType.LOWER_BACK]: {
+                participation: 0.5
+            },
+        },
+        sets: [{
+            weight: 60,
+            reps: 8
+        }, {
+            weight: 61,
+            reps: 8
+        }, {
+            weight: 62,
+            reps: 7
+        }, {
+            weight: 63,
+            reps: 6
+        }, {
+            weight: 64,
+            reps: 5
+        }]
+    },
 ]
 
 const exampleResultOfWorkoutTransformation: Record<string, number> = {

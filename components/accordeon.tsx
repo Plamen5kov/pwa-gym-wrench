@@ -1,74 +1,62 @@
-import { Accordion, AccordionContent, AccordionPanel, AccordionTitle } from 'flowbite-react';
+import { Exercise } from '@/interfaces/exercise';
+import { Accordion, Button } from 'flowbite-react';
+import { useState } from 'react';
+import NumberInputHorizontal from './number-input-horizontal';
+import React from 'react';
 
-function AccordeonMy() {
+
+interface Props {
+  workout: Array<Exercise>
+}
+
+function AccordeonMy({ workout }: Props) {
+
+  const [workoutState, setWorkoutState] = useState(
+    workout.map((e, i) => ({
+      name: e.name,
+      sets: e.sets.map((s, i) => ({ reps: s.reps, weight: s.weight }))
+    })))
+
+  const [exerciseIndex, setExerciseIndex] = useState(0)
+  const [setIndex, setSetIndex] = useState(
+    workoutState
+      .map((e, index) => ({ [index]: 0 }))
+      .reduce((acc: any, val) => ({ ...acc, ...val }), {})
+  )
+  console.log(workoutState)
   return (
-    <Accordion>
-      <AccordionPanel>
-        <AccordionTitle>What is Flowbite?</AccordionTitle>
-        <AccordionContent>
-          <p className="mb-2 text-gray-500 dark:text-gray-400">
-            Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons,
-            dropdowns, modals, navbars, and more.
-          </p>
-          <p className="text-gray-500 dark:text-gray-400">
-            Check out this guide to learn how to&nbsp;
-            <a
-              href="https://flowbite.com/docs/getting-started/introduction/"
-              className="text-cyan-600 hover:underline dark:text-cyan-500"
-            >
-              get started&nbsp;
-            </a>
-            and start developing websites even faster with components on top of Tailwind CSS.
-          </p>
-        </AccordionContent>
-      </AccordionPanel>
-      <AccordionPanel>
-        <AccordionTitle>Is there a Figma file available?</AccordionTitle>
-        <AccordionContent>
-          <p className="mb-2 text-gray-500 dark:text-gray-400">
-            Flowbite is first conceptualized and designed using the Figma software so everything you see in the library
-            has a design equivalent in our Figma file.
-          </p>
-          <p className="text-gray-500 dark:text-gray-400">
-            Check out the
-            <a href="https://flowbite.com/figma/" className="text-cyan-600 hover:underline dark:text-cyan-500">
-              Figma design system
-            </a>
-            based on the utility classes from Tailwind CSS and components from Flowbite.
-          </p>
-        </AccordionContent>
-      </AccordionPanel>
-      <AccordionPanel>
-        <AccordionTitle>What are the differences between Flowbite and Tailwind UI?</AccordionTitle>
-        <AccordionContent>
-          <p className="mb-2 text-gray-500 dark:text-gray-400">
-            The main difference is that the core components from Flowbite are open source under the MIT license, whereas
-            Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone
-            components, whereas Tailwind UI offers sections of pages.
-          </p>
-          <p className="mb-2 text-gray-500 dark:text-gray-400">
-            However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no
-            technical reason stopping you from using the best of two worlds.
-          </p>
-          <p className="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
-          <ul className="list-disc pl-5 text-gray-500 dark:text-gray-400">
-            <li>
-              <a href="https://flowbite.com/pro/" className="text-cyan-600 hover:underline dark:text-cyan-500">
-                Flowbite Pro
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://tailwindui.com/"
-                rel="nofollow"
-                className="text-cyan-600 hover:underline dark:text-cyan-500"
-              >
-                Tailwind UI
-              </a>
-            </li>
-          </ul>
-        </AccordionContent>
-      </AccordionPanel>
+    <Accordion collapseAll={false} alwaysOpen={true} flush={true}>
+      <Accordion.Panel>
+        <Accordion.Title>Exercise</Accordion.Title>
+        <Accordion.Content>
+          <div className="grid place-items-center gap-2 m-2 ">
+            {workout.map((exercise, index) => <Button
+              onClick={() => setExerciseIndex(index)}
+              className='m-2'
+              {...(index === exerciseIndex ? { "pill": true } : { "outline": true, "pill": true })}> {exercise.name}
+            </Button>)}
+          </div>
+        </Accordion.Content>
+      </Accordion.Panel>
+      <Accordion.Panel>
+        <Accordion.Title>Set</Accordion.Title>
+        <Accordion.Content>
+          <div className="grid place-items-center gap-2 m-2 ">
+            <div className='flex flex-row'>
+              {workoutState[exerciseIndex].sets.map((set, index) => <Button
+                onClick={() => {
+                  setSetIndex({ ...setIndex, ...{ [exerciseIndex]: index } })
+                }}
+                {...(index === setIndex[exerciseIndex] ? { "pill": true } : { "outline": true, "pill": true })}> {index + 1}
+              </Button>)}
+            </div>
+          </div>
+          <div className="gap-2 m-2">
+            <NumberInputHorizontal label='weight' initialValue={workoutState[exerciseIndex].sets[setIndex[exerciseIndex]].weight} onChange={(num) => console.log(`weight changed: ${num}`)} />
+            <NumberInputHorizontal label='reps' initialValue={workoutState[exerciseIndex].sets[setIndex[exerciseIndex]].weight} onChange={(num) => console.log(`reps have changed: ${num}`)} />
+          </div>
+        </Accordion.Content>
+      </Accordion.Panel>
     </Accordion>
   );
 }
