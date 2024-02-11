@@ -31,6 +31,7 @@ function AccordeonMy({ workout }: Props) {
         <Accordion.Content>
           <div className="grid place-items-center gap-2 m-2 ">
             {workout.map((exercise, index) => <Button
+              key={`exercise-${index}`}
               onClick={() => setExerciseIndex(index)}
               className='m-2'
               {...(index === exerciseIndex ? { "pill": true } : { "outline": true, "pill": true })}> {exercise.name}
@@ -44,6 +45,7 @@ function AccordeonMy({ workout }: Props) {
           <div className="grid place-items-center gap-2 m-2 ">
             <div className='flex flex-row'>
               {workoutState[exerciseIndex].sets.map((set, index) => <Button
+                key={`exercise-${exerciseIndex}-set-${index}`}
                 onClick={() => {
                   setSetIndex({ ...setIndex, ...{ [exerciseIndex]: index } })
                 }}
