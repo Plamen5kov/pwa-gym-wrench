@@ -100,6 +100,23 @@ export const exampleWorkout: Array<Exercise> = [
     },
 ]
 
+const setPerExercise = {
+    //exerciseIndex: setIndex
+    "0": 1,
+    "1": 2
+}
+
+const weightRepsPerExerciseSet = {
+    "01": {
+        weight: 1,
+        set: 2
+    },
+    "00": {
+        weight: 12,
+        set: 24
+    },
+}
+
 const exampleResultOfWorkoutTransformation: Record<string, number> = {
     [MuscleType.CHEST]: 1920,
     [MuscleType.UPPER_BACK]: 1620,
