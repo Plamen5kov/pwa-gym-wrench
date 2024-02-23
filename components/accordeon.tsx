@@ -1,4 +1,4 @@
-import { Exercise } from '@/interfaces/exercise';
+import { Workout } from '@/interfaces/exercise';
 import { Accordion, Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import NumberInputHorizontal, { InputChangeEvent } from './number-input-horizontal';
@@ -6,7 +6,7 @@ import React from 'react';
 
 
 interface Props {
-  workout: Array<Exercise>
+  workout: Workout
 }
 
 const initialFilters = {
@@ -16,9 +16,9 @@ const initialFilters = {
 function AccordeonMy({ workout }: Props) {
 
   const [workoutState, setWorkoutState] = useState(
-    workout.map((e, i) => ({
+    Object.values(workout).map((e, i) => ({
       name: e.name,
-      sets: e.sets.map((s, i) => ({ reps: s.reps, weight: s.weight }))
+      sets: Object.values(e.sets).map((s) => ({ reps: s.reps, weight: s.weight }))
     })))
 
   const [filter, setFilter] = useState(initialFilters)
@@ -43,7 +43,7 @@ function AccordeonMy({ workout }: Props) {
         <Accordion.Content>
           <div className="grid place-items-center gap-2 m-2 ">
             {
-              workout.map((exercise, index) =>
+              Object.values(workout).map((exercise, index) =>
                 <Button
                   key={`exercise-${index}`}
                   onClick={() => setExerciseIndex(index)}
@@ -63,43 +63,56 @@ function AccordeonMy({ workout }: Props) {
         <Accordion.Content>
           <div className="grid place-items-center gap-2 m-2 ">
             <div className='flex flex-row'>
-              {workoutState[exerciseIndex].sets.map((set, index) =>
-                <Button
-                  key={`exercise-${exerciseIndex}-set-${index}`}
-                  onClick={() => {
-                    setSetIndex(index)
-                  }}
-                  {...(index === filter[exerciseIndex] ? { "pill": true } : { "outline": true, "pill": true })}> {index + 1}
-                </Button>)
+              {
+                Object.keys(workoutState[exerciseIndex].sets).map((index) =>
+                  <Button
+                    key={`exercise-${exerciseIndex}-set-${index}`}
+                    onClick={() => {
+                      setSetIndex(Number(index))
+                    }}
+                    {...(Number(index) === filter[exerciseIndex] ? { "pill": true } : { "outline": true, "pill": true })}> {Number(index) + 1}
+                  </Button>)
               }
             </div>
           </div>
-          {workoutState[exerciseIndex].sets.map((set, setIndex) =>
-            setIndex === filter[exerciseIndex]
-              ?
-              (<div className="gap-2 m-2">
-                <NumberInputHorizontal
-                  label='weight'
-                  name={`exi-${exerciseIndex}-seti-${setIndex}-weight`}
-                  initialValue={workoutState[exerciseIndex].sets[filter[exerciseIndex]].weight}
-                  onChange={(target: InputChangeEvent) => {
-                    // setWorkoutState({ ...workoutState, ...{ ...{ sets: [] } })
-                    console.log(`weight for ${target.name}: ${target.value}`)
-                  }}
-                />
-                <NumberInputHorizontal
-                  label='reps'
-                  name={`exi-${exerciseIndex}-seti-${setIndex}-reps`}
-                  initialValue={workoutState[exerciseIndex].sets[filter[exerciseIndex]].reps}
-                  onChange={(target: InputChangeEvent) => {
+          {
+            Object.keys(workoutState[exerciseIndex].sets).map((setIndex) =>
+              setIndex === filter[exerciseIndex]?.toString()
+                ?
+                (<div className="gap-2 m-2">
+                  <NumberInputHorizontal
+                    label='weight'
+                    name={`${workoutState[exerciseIndex].name}-${setIndex}-weight`}
+                    initialValue={workoutState[exerciseIndex].sets[filter[exerciseIndex]].weight}
+                    onChange={(target: InputChangeEvent) => {
+                      setWorkoutState(
+                        Object.assign(
+                          workoutState,
+                          {
+                            name: target?.name?.split("-")?.[0],
+                            sets: Object.assign(
+                              workoutState[exerciseIndex].sets,
+                              { [setIndex]: { weight: target.value } }
+                            )
+                          }
+                        )
+                      )
+                      console.log(`weight for ${target.name}: ${target.value}`)
+                    }}
+                  />
+                  <NumberInputHorizontal
+                    label='reps'
+                    name={`exi-${exerciseIndex}-seti-${setIndex}-reps`}
+                    initialValue={workoutState[exerciseIndex].sets[filter[exerciseIndex]].reps}
+                    onChange={(target: InputChangeEvent) => {
 
-                    console.log(`reps for ${target.name}: ${target.value}`)
-                  }}
-                />
-              </div>)
-              :
-              null
-          )}
+                      console.log(`reps for ${target.name}: ${target.value}`)
+                    }}
+                  />
+                </div>)
+                :
+                null
+            )}
         </Accordion.Content>
 
       </Accordion.Panel >

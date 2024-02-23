@@ -1,14 +1,14 @@
-import { Exercise, InvolvedMuscles } from "@/interfaces/exercise"
+import { Workout, InvolvedMuscles, Exercise } from "@/interfaces/exercise"
 import { DIFICULTY_MAX, DIFICULTY_MIN } from "./constants"
 
 export class CalculationUtility {
 
-    public static getInvolvedMuscles(workout: Array<Exercise>): InvolvedMuscles {
+    public static getInvolvedMuscles(workout: Workout): InvolvedMuscles {
 
-        return workout
+        return Object.values(workout)
             // calculate volume per muscle and add it to a volume property inside each muscle
             .map((exercise: Exercise) => {
-                const workoutVolume = exercise.sets.reduce((acc, s) => acc + (s.weight * s.reps), 0)
+                const workoutVolume = Object.values(exercise.sets).reduce((acc, s) => acc + (s.weight * s.reps), 0)
                 return {
                     name: exercise.name,
                     primaryMuscles: {
