@@ -9,7 +9,7 @@ const Recipes = () => (
 			<ul className=''>
 				<li className=''>
 					<div className="grid gap-4 grid-cols-1 ">
-						<NumberInputHorizontal label='Body Weight' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal name='Body Weight' label='Body Weight' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
 					</div>
 				</li>
 			</ul>
@@ -22,27 +22,27 @@ const Recipes = () => (
 			<ul className=''>
 				<li className=''>
 					<div className="grid gap-4 grid-cols-1 ">
-						<NumberInputHorizontal label='Chest' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal name='Chest' label='Chest' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
 					</div>
 				</li>
 				<li className=''>
 					<div className="grid gap-4 grid-cols-1 ">
-						<NumberInputHorizontal label='Biceps' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal name='Biceps' label='Biceps' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
 					</div>
 				</li>
 				<li className=''>
 					<div className="grid gap-4 grid-cols-1 ">
-						<NumberInputHorizontal label='Tigh' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal name='Tigh' label='Tigh' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
 					</div>
 				</li>
 				<li className=''>
 					<div className="grid gap-4 grid-cols-1 ">
-						<NumberInputHorizontal label='Waist' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal name='Waist' label='Waist' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
 					</div>
 				</li>
 				<li className=''>
 					<div className="grid gap-4 grid-cols-1 ">
-						<NumberInputHorizontal label='Hips' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal name='Hips' label='Hips' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
 					</div>
 				</li>
 			</ul>
@@ -55,27 +55,27 @@ const Recipes = () => (
 			<ul className=''>
 				<li className=''>
 					<div className="grid gap-4 grid-cols-1 ">
-						<NumberInputHorizontal label='Above Femur' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal name='Above Femur' label='Above Femur' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
 					</div>
 				</li>
 				<li className=''>
 					<div className="grid gap-4 grid-cols-1 ">
-						<NumberInputHorizontal label='2cm bellow belly button' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal name='2cm bellow belly button' label='2cm bellow belly button' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
 					</div>
 				</li>
 				<li className=''>
 					<div className="grid gap-4 grid-cols-1 ">
-						<NumberInputHorizontal label='2cm above belly button' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal name='2cm above belly button' label='2cm above belly button' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
 					</div>
 				</li>
 				<li className=''>
 					<div className="grid gap-4 grid-cols-1 ">
-						<NumberInputHorizontal label='Hip' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal name='Hip' label='Hip' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
 					</div>
 				</li>
 				<li className=''>
 					<div className="grid gap-4 grid-cols-1 ">
-						<NumberInputHorizontal label='Love handles' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal name='Love handles' label='Love handles' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
 					</div>
 				</li>
 			</ul>

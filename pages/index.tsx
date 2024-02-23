@@ -50,9 +50,9 @@ const Index = () => {
 					}
 					} />
 					<div className="grid gap-4 grid-cols-1 ">
-					<NumberInputHorizontal label='sets' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
-					<NumberInputHorizontal label='weight' onChange={(num) => console.log(`Number weight has changed: ${num}`)}/>
-					<NumberInputHorizontal label='reps' onChange={(num) => console.log(`Number reps has changed: ${num}`)}/>
+						<NumberInputHorizontal name='sets' label='sets' onChange={(num) => console.log(`Number sets has changed: ${num}`)} />
+						<NumberInputHorizontal name='weight' label='weight' onChange={(num) => console.log(`Number weight has changed: ${num}`)} />
+						<NumberInputHorizontal name='reps' label='reps' onChange={(num) => console.log(`Number reps has changed: ${num}`)} />
 					</div>
 					<br />
 

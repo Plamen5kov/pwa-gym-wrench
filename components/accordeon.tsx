@@ -79,7 +79,7 @@ function AccordeonMy({ workout }: Props) {
             Object.keys(workoutState[exerciseIndex].sets).map((setIndex) =>
               setIndex === filter[exerciseIndex]?.toString()
                 ?
-                (<div className="gap-2 m-2">
+                (<div className="gap-2 m-2" key={`${workoutState[exerciseIndex].name}-${setIndex}-weight`}>
                   <NumberInputHorizontal
                     label='weight'
                     name={`${workoutState[exerciseIndex].name}-${setIndex}-weight`}
